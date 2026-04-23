@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,18 +16,22 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
+
+import { complex64ndarray } from '@stdlib/types/ndarray';
 
 /**
-* BLAS level 1 routine to multiply a one-dimensional single-precision complex floating-point ndarray `x` by a constant `alpha` and add the result to a one-dimensional single-precision complex floating-point ndarray `y`.
+* Multiplies a one-dimensional single-precision complex floating-point ndarray `x` by a constant `alpha` and adds the result to a one-dimensional single-precision complex floating-point ndarray `y`.
 *
-* @module @stdlib/blas-base-ndarray-caxpy
+* @param arrays - array-like object containing an input ndarray, an output ndarray, and a zero-dimensional ndarray containing a scalar constant
+* @returns output ndarray
 *
 * @example
 * var Complex64Vector = require( '@stdlib/ndarray-vector-complex64' );
 * var Complex64 = require( '@stdlib/complex-float32-ctor' );
 * var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
-* var caxpy = require( '@stdlib/blas-base-ndarray-caxpy' );
 *
 * var x = new Complex64Vector( [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 ] );
 * var y = new Complex64Vector( [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ] );
@@ -42,12 +46,9 @@
 * var bool = ( z === y );
 * // returns true
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function caxpy( arrays: [ complex64ndarray, complex64ndarray, complex64ndarray ] ): complex64ndarray;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = caxpy;
