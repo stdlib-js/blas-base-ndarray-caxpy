@@ -41,38 +41,32 @@ limitations under the License.
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-base-ndarray-caxpy
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-caxpy = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-ndarray-caxpy@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var caxpy = require( 'path/to/vendor/umd/blas-base-ndarray-caxpy/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-ndarray-caxpy@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.caxpy;
-})();
-</script>
+var caxpy = require( '@stdlib/blas-base-ndarray-caxpy' );
 ```
 
 #### caxpy( arrays )
@@ -80,18 +74,16 @@ If no recognized module system is present, access bundle contents via the global
 Multiplies a one-dimensional single-precision complex floating-point ndarray `x` by a constant `alpha` and adds the result to a one-dimensional single-precision complex floating-point ndarray `y`.
 
 ```javascript
-var Complex64Array = require( '@stdlib/array-complex64' );
+var Complex64Vector = require( '@stdlib/ndarray-vector-complex64' );
 var Complex64 = require( '@stdlib/complex-float32-ctor' );
-var scalar2ndarray = require( '@stdlib/ndarray-base-from-scalar' );
-var ndarray = require( '@stdlib/ndarray-base-ctor' );
+var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
 
-var xbuf = new Complex64Array( [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 ] );
-var x = new ndarray( 'complex64', xbuf, [ 3 ], [ 1 ], 0, 'row-major' );
+var x = new Complex64Vector( [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 ] );
+var y = new Complex64Vector( [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ] );
 
-var ybuf = new Complex64Array( [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ] );
-var y = new ndarray( 'complex64', ybuf, [ 3 ], [ 1 ], 0, 'row-major' );
-
-var alpha = scalar2ndarray( new Complex64( 1.0, 2.0 ), 'complex64', 'row-major' );
+var alpha = scalar2ndarray( new Complex64( 1.0, 2.0 ), {
+    'dtype': 'complex64'
+});
 var z = caxpy( [ x, y, alpha ] );
 // returns <ndarray>[ <Complex64>[ -2.0, 5.0 ], <Complex64>[ -4.0, 11.0 ], <Complex64>[ -6.0, 17.0 ] ]
 
@@ -101,7 +93,11 @@ var bool = ( y === z );
 
 The function has the following parameters:
 
--   **arrays**: array-like object containing an input ndarray, an output ndarray, and a zero-dimensional ndarray containing a scalar constant.
+-   **arrays**: array-like object containing the following ndarrays in order:
+
+    -   input ndarray
+    -   output ndarray
+    -   zero-dimensional ndarray containing a scalar constant
 
 </section>
 
@@ -119,30 +115,22 @@ The function has the following parameters:
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/random-array-discrete-uniform@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-complex64@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-ctor@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-from-scalar@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-base-ctor@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-to-array@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-base-ndarray-caxpy@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );
+var Complex64Vector = require( '@stdlib/ndarray-vector-complex64' );
+var Complex64 = require( '@stdlib/complex-float32-ctor' );
+var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var caxpy = require( '@stdlib/blas-base-ndarray-caxpy' );
 
 var opts = {
     'dtype': 'float32'
 };
 
-var xbuf = new Complex64Array( discreteUniform( 10, 0, 100, opts ) );
-var x = new ndarray( 'complex64', xbuf, [ xbuf.length ], [ 1 ], 0, 'row-major' );
+var x = new Complex64Vector( discreteUniform( 10, 0, 100, opts ) );
 console.log( ndarray2array( x ) );
 
-var ybuf = new Complex64Array( discreteUniform( xbuf.length*2, 0, 10, opts ) );
-var y = new ndarray( 'complex64', ybuf, [ ybuf.length ], [ 1 ], 0, 'row-major' );
+var y = new Complex64Vector( discreteUniform( 10, 0, 10, opts ) );
 console.log( ndarray2array( y ) );
 
 var alpha = scalar2ndarray( new Complex64( 1.0, 2.0 ), {
@@ -150,11 +138,6 @@ var alpha = scalar2ndarray( new Complex64( 1.0, 2.0 ), {
 });
 var out = caxpy( [ x, y, alpha ] );
 console.log( ndarray2array( out ) );
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
