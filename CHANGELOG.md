@@ -22,6 +22,7 @@
 
 <details>
 
+-   [`57e6e8b`](https://github.com/stdlib-js/stdlib/commit/57e6e8b95cbf57aa054c836f3b6f46c8892b8d44) - **chore:** propagate `blas/base/ndarray/*` modernization fixes to sibling packages [(#11742)](https://github.com/stdlib-js/stdlib/pull/11742) _(by Philipp Burckhardt)_
 -   [`2e59e9b`](https://github.com/stdlib-js/stdlib/commit/2e59e9b50235f2996b131a892f5eedd3c3fd3528) - **chore:** modernize examples and benchmarks _(by Athan Reines)_
 -   [`cd1a4d3`](https://github.com/stdlib-js/stdlib/commit/cd1a4d3e3726a8e60d8a8f5b1999242d32b8435c) - **bench:** fix assertion messages _(by Athan Reines)_
 -   [`b8ad692`](https://github.com/stdlib-js/stdlib/commit/b8ad692edb5a6567e471fbbfc20df12f34dd214c) - **test:** update description _(by Athan Reines)_
@@ -37,10 +38,11 @@
 
 ### Contributors
 
-A total of 2 people contributed to this release. Thank you to the following contributors:
+A total of 3 people contributed to this release. Thank you to the following contributors:
 
 -   Athan Reines
 -   Kaustubh Patange
+-   Philipp Burckhardt
 
 </section>
 
